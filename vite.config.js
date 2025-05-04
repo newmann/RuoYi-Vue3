@@ -42,7 +42,7 @@ export default defineConfig(({ mode, command }) => {
     },
     // vite 相关配置
     server: {
-      port: 80,
+      port: 5777,
       host: true,
       open: true,
       proxy: {
@@ -50,7 +50,7 @@ export default defineConfig(({ mode, command }) => {
         '/dev-api': {
           target: baseUrl,
           changeOrigin: true,
-          rewrite: (p) => p.replace(/^\/dev-api/, '')
+          rewrite: (p) => p.replace(/^\/dev-api/, '/rest/')
         },
          // springdoc proxy
          '^/v3/api-docs/(.*)': {

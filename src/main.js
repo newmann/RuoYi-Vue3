@@ -7,6 +7,9 @@ import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import locale from 'element-plus/es/locale/lang/zh-cn'
 
+//参考：https://element-plus.formilyjs.org/guide/#%E6%8C%89%E9%9C%80%E6%89%93%E5%8C%85
+import 'element-plus/theme-chalk/src/base.scss'
+
 import '@/assets/styles/index.scss' // global css
 
 import App from './App'
