@@ -1,0 +1,330 @@
+{
+  "title": "增删改查示例",
+  "remark": "bla bla bla",
+  "toolbar": [
+    {
+      "type": "button",
+      "actionType": "dialog",
+      "label": "新增",
+      "icon": "fa fa-plus pull-left",
+      "primary": true,
+      "dialog": {
+        "title": "新增",
+        "body": {
+          "type": "form",
+          "name": "sample-edit-form",
+          "api": "post:/dev-api/s1/collie-spa/product/create",
+          "body": [
+            {
+              "type": "input-text",
+              "name": "productName",
+              "label": "Name",
+              "required": true
+            },
+            {
+              "name": "autoPseudo",
+              "type": "checkbox",
+              "label": "是否自动编码",
+              "option": "自动",
+              "value": true
+            },            
+            {
+              "type": "input-text",
+              "name": "pseudoId",
+              "label": "Pseudo",
+              "visibleOn": "${!autoPseudo}"
+            },
+            {
+              "type": "divider"
+            },
+            {
+              "type": "select",
+              "name": "productTypeEnumId",
+              "label": "Product Type",
+              "source": "/dev-api/s1/collie-spa/framework/EnumerationList?enumTypeId=ProductType"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "body": {
+    "type": "crud",
+    "draggable": true,
+    "api": "get:/dev-api/s1/collie-spa/product/productList",
+    "perPage": 20,
+    "keepItemSelectionOnPageChange": true,
+    "maxKeepItemSelectionLength": 11,
+    "showIndex": true,
+    "syncLocation": false,
+    "labelTpl": "${pseudoId} ${name}",
+    "autoGenerateFilter": {
+      "columnsNum": 3,
+      "showBtnToolbar": true
+    },
+    "bulkActions": [
+      {
+        "label": "批量删除",
+        "actionType": "ajax",
+        "confirmText": "确定要批量删除?"
+      },
+      {
+        "label": "批量修改",
+        "actionType": "dialog",
+        "dialog": {
+          "title": "批量编辑",
+          "name": "sample-bulk-edit",
+          "body": {
+            "type": "form",
+            "body": [
+              {
+                "type": "hidden",
+                "name": "ids"
+              },
+              {
+                "type": "input-text",
+                "name": "engine",
+                "label": "Engine"
+              }
+            ]
+          }
+        }
+      }
+    ],
+
+    "filterTogglable": true,
+    "headerToolbar": [
+      "filter-toggler",
+      "reload",
+      "bulkActions",
+      {
+        "type": "tpl",
+        "tpl": "定制内容示例：当前有 ${count} 条数据。",
+        "className": "v-middle"
+      },
+      {
+        "type": "link",
+        "href": "https://www.baidu.com",
+        "body": "百度一下",
+        "htmlTarget": "_parent",
+        "className": "v-middle"
+      },
+      {
+        "type": "columns-toggler",
+        "align": "right"
+      },
+      {
+        "type": "drag-toggler",
+        "align": "right"
+      },
+      {
+        "type": "pagination",
+        "align": "right"
+      }
+    ],
+    "footerToolbar": [
+      "statistics",
+      "switch-per-page",
+      "pagination"
+    ],
+    "itemActions":[
+        {
+          "type": "button",
+          "icon": "fa fa-eye",
+          "actionType": "dialog",
+          "tooltip": "查看",
+          "dialog": {
+            "title": "查看",
+            "body": {
+              "type": "form",
+              "body": [
+                {
+                  "type": "static",
+                  "name": "engine",
+                  "label": "Engine"
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "static",
+                  "name": "browser",
+                  "label": "Browser"
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "static",
+                  "name": "platform",
+                  "label": "Platform(s)"
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "static",
+                  "name": "version",
+                  "label": "Engine version"
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "static",
+                  "name": "grade",
+                  "label": "CSS grade"
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "html",
+                  "html": "<p>添加其他 <span>Html 片段</span> 需要支持变量替换（todo）.</p>"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "button",
+          "icon": "fa fa-pencil",
+          "tooltip": "编辑",
+          "actionType": "drawer",
+          "drawer": {
+            "position": "left",
+            "size": "lg",
+            "title": "编辑",
+            "body": {
+              "type": "form",
+              "name": "sample-edit-form",
+              "data": {
+                "env": "test"
+              },
+              "api": {
+                "method": "post",
+                "url": "/amis/api/sample/$id",
+                "messages": {
+                  "success": "成功了-${env}"
+                }
+              },
+              "body": [
+                {
+                  "type": "input-text",
+                  "name": "engine",
+                  "label": "Engine",
+                  "required": true
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "input-text",
+                  "name": "browser",
+                  "label": "Browser",
+                  "required": true
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "input-text",
+                  "name": "platform",
+                  "label": "Platform(s)",
+                  "required": true
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "input-text",
+                  "name": "version",
+                  "label": "Engine version"
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "select",
+                  "name": "grade",
+                  "label": "CSS grade",
+                  "options": [
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "X"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "button",
+          "icon": "fa fa-times text-danger",
+          "actionType": "ajax",
+          "tooltip": "删除",
+          "confirmText": "您确认要删除?",
+          "api": "delete:/amis/api/sample/$id"
+        }
+      ],
+    "columns": [
+      {
+        "name": "productId",
+        "label": "productId",
+        "type": "text",
+        "toggled": false,
+        "remark": "Bla bla Bla"
+      },
+      {
+        "name": "pseudoId",
+        "label": "pseudoId",
+        "sortable": true,
+        "searchable": true,
+        "popOver": {
+          "body": "Popover 内容：${platform}",
+          "trigger": "hover"
+        },
+        "popOverEnableOn": "this.id === 1",
+        "type": "text",
+        "toggled": true
+      },
+      {
+        "name": "name",
+        "label": "name",
+        "sortable": true,
+        "searchable": true,
+        "type": "text",
+        "toggled": true
+      },
+      {
+        "name": "ownerPartyId",
+        "label": "ownerPartyId",
+        "searchable": true,
+        "popOver": {
+          "body": "Popover 内容：${platform}"
+        },
+        "sortable": true,
+        "type": "text",
+        "toggled": true
+      },
+      {
+        "name": "productTypeEnumId",
+        "label": "productTypeEnumId",
+        "searchable": true,
+        "sortable": true,
+        "type": "text",
+        "toggled": true
+      },
+      {
+        "name": "type",
+        "label": "type",
+        "searchable": true,
+        "sortable": true,
+        "type": "text",
+        "toggled": true
+      } 
+    ]
+  }
+}

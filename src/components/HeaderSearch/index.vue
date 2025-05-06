@@ -115,6 +115,7 @@ function generateRoutes(routes, basePath = '', prefixTitle = []) {
   let res = []
 
   for (const r of routes) {
+    if(Object.keys(r).length === 0){continue}//跳过r为空置
     // skip hidden router
     if (r.hidden) { continue }
     const p = r.path.length > 0 && r.path[0] === '/' ? r.path : '/' + r.path

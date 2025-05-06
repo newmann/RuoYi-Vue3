@@ -6,11 +6,14 @@ import 'amis/sdk/rest.js';
 import 'amis/sdk/sdk.css';
 import 'amis/sdk/iconfont.css';
 import 'amis/sdk/helper.css';
+import 'amis/sdk/dark.css';
+
 import { useRouter } from 'vue-router';
 // import { useAuthStore } from '@/stores/auth';
 import useUserStore from '@/store/modules/user';
 import { DIRECTUS_URL,MOQUI_TOKEN_KEY } from '@/constants';
 import { fileIdToURL } from '@/utils/file-id-to-url';
+import useSettingsStore from '@/store/modules/settings';
 
 const props = defineProps({
   /** The amis JSON schema */
@@ -46,6 +49,28 @@ onMounted(() => {
   
   const router = useRouter();
   const auth = useUserStore();
+
+  // 这种方法无效，还需要找其他办法来切换
+  // function loadCSS(url: string) {
+  //   const link = document.createElement('link');
+  //   link.rel = 'stylesheet';
+  //   link.href = url;
+  //   document.head.appendChild(link);
+  // }
+
+  // if(useSettingsStore().isDark){
+  //   loadCSS('amis/sdk/dark.css');
+  // };
+
+
+  // let propsEnv; 
+
+  // if(isDark){
+  //   propsEnv = {...props.env,theme:'dark'}
+  // }else{
+  //   propsEnv = {...props.env,theme:'default'}
+  // }
+
   registerFilter('fileIdToURL', (fileId: string) => fileIdToURL(fileId, auth.token));
   const instance = scoped.embed(
     '#amis-component',
@@ -116,7 +141,7 @@ onMounted(() => {
        */
       responseAdaptor: (api: any, payload: any, query: any, request: any, response: any) => {
         // console.log('responseAdaptor:payload=%o', payload);
-        // console.log('responseAdaptor:response=%o', response);
+        console.log('responseAdaptor:response=%o', response);
         // console.log('responseAdaptor:api=%o', api);
         // console.log('responseAdaptor:query=%o', query);
         // console.log('responseAdaptor:request=%o', request);

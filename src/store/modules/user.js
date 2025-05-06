@@ -35,6 +35,8 @@ const useUserStore = defineStore(
       getInfo() {
         return new Promise((resolve, reject) => {
           getInfo().then(res => {
+            console.log("getInfo res:%o",res)
+            
             const user = res.user
             let avatar = user.avatar || ""
             if (!isHttp(avatar)) {
@@ -58,11 +60,13 @@ const useUserStore = defineStore(
       // 退出系统
       logOut() {
         return new Promise((resolve, reject) => {
+          //不管后台是否退出，前端都退出
+          this.token = ''
+          this.roles = []
+          this.permissions = []
+          removeToken()
+
           logout(this.token).then(() => {
-            this.token = ''
-            this.roles = []
-            this.permissions = []
-            removeToken()
             resolve()
           }).catch(error => {
             reject(error)

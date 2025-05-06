@@ -73,7 +73,7 @@ export const constantRoutes = [
   {
     path: '/user',
     component: Layout,
-    hidden: true,
+    // hidden: true,
     redirect: 'noredirect',
     children: [
       {
@@ -81,6 +81,19 @@ export const constantRoutes = [
         component: () => import('@/views/system/user/profile/index'),
         name: 'Profile',
         meta: { title: '个人中心', icon: 'user' }
+      }
+    ]
+  },
+  {
+    path: '/product',
+    component: Layout,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'product',
+        component: () => import('@/views/product/product/index'),
+        name: 'Product',
+        meta: { title: '商品管理', activeMenu: '/product/product' }
       }
     ]
   }
@@ -157,7 +170,8 @@ export const dynamicRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
     ]
-  }
+  },
+
 ]
 
 const router = createRouter({
